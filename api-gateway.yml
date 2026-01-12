@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=1
+        
+        - id: tinkoff-integration-service
+          uri: lb://tinkoff-integration-service
+          predicates:
+            - Path=/api/tinkoff/**
+          filters:
+            - StripPrefix=1
+        
+        - id: telegram-bot-service
+          uri: lb://telegram-bot-service
+          predicates:
+            - Path=/api/bot/**
+          filters:
+            - StripPrefix=1
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty: INFO

@@ -6,8 +6,8 @@ spring:
     name: tinkoff-integration-service
   datasource:
     url: jdbc:postgresql://localhost:5433/tinkoff_cache_db
-    username: postgres
-    password: postgres
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -19,8 +19,14 @@ spring:
         format_sql: true
 
 eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
   instance:
     instance-id: ${spring.application.name}:${random.value}
+    prefer-ip-address: true
 
 tinkoff:
   api:

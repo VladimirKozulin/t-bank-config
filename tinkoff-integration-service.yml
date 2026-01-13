@@ -29,7 +29,5 @@ eureka:
     prefer-ip-address: true
 
 tinkoff:
-  api:
-    token: ${TINKOFF_API_TOKEN:your-token-here}
   cache:
     ttl-minutes: 5

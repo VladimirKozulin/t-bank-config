@@ -36,3 +36,7 @@ logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     reactor.netty: INFO
+
+elasticsearch:
+  host: localhost
+  port: 9200

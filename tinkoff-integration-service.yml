@@ -31,3 +31,17 @@ eureka:
 tinkoff:
   cache:
     ttl-minutes: 5
+
+logging:
+  level:
+    root: INFO
+    ru.javabegin: DEBUG
+  file:
+    name: logs/tinkoff-integration-service.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+elasticsearch:
+  host: localhost
+  port: 9200

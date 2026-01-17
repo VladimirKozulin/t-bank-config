@@ -1,4 +1,10 @@
 # Общие настройки для всех микросервисов
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
 eureka:
   client:
     service-url:

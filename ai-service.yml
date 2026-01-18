@@ -17,6 +17,14 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+  data:
+    mongodb:
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+      database: ${MONGODB_DATABASE:news_cache}
+      username: ${MONGODB_USERNAME:admin}
+      password: ${MONGODB_PASSWORD:admin123}
+      authentication-database: admin
 
 eureka:
   client:
@@ -45,6 +53,14 @@ openrouter:
 analysis:
   target-monthly-income: 100000
   default-years-horizon: 15
+
+# Marketaux News API Configuration
+marketaux:
+  api-key: ${MARKETAUX_API_KEY:}
+  base-url: https://api.marketaux.com/v1
+  timeout: 30
+  cache-ttl-hours: 6
+  max-news-per-ticker: 10
 
 logging:
   level:

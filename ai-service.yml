@@ -36,24 +36,31 @@ eureka:
     instance-id: ${spring.application.name}:${random.value}
     prefer-ip-address: true
 
-openrouter:
-  base-url: https://openrouter.ai/api/v1
-  model: deepseek/deepseek-r1-0528:free
-  fallback-models:
-    - deepseek/deepseek-r1-0528:free           # Лучшая для рассуждений и анализа
-    - meta-llama/llama-3.3-70b-instruct:free   # Мощная для сложных задач
-    - meta-llama/llama-3.1-405b-instruct:free  # Самая мощная для сложного анализа
-    - google/gemini-2.0-flash-exp:free         # Быстрая с большим контекстом (1M)
-    - mistralai/mistral-7b-instruct:free       # Быстрая запасная
+gemini:
+  base-url: https://generativelanguage.googleapis.com/v1beta/models
+  default-model: gemini-2.0-flash-exp
   timeout: 120
-  keys:
-    portfolio: ${OPENROUTER_KEY_PORTFOLIO:}
-    market: ${OPENROUTER_KEY_MARKET:}
-    news: ${OPENROUTER_KEY_NEWS:}
-    stock: ${OPENROUTER_KEY_STOCK:}
-    strategy: ${OPENROUTER_KEY_STRATEGY:}
-    analyst: ${OPENROUTER_KEY_ANALYST:}
-    report: ${OPENROUTER_KEY_REPORT:}
+  models:
+    - name: flash-lite
+      model-id: gemini-2.0-flash-exp
+      requests-per-minute: 15
+      requests-per-day: 1000
+    - name: flash
+      model-id: gemini-2.0-flash-exp
+      requests-per-minute: 10
+      requests-per-day: 250
+    - name: pro
+      model-id: gemini-2.0-flash-exp
+      requests-per-minute: 5
+      requests-per-day: 100
+  api-keys:
+    portfolio: ${GEMINI_API_KEY_PORTFOLIO:}
+    market: ${GEMINI_API_KEY_MARKET:}
+    news: ${GEMINI_API_KEY_NEWS:}
+    stock: ${GEMINI_API_KEY_STOCK:}
+    strategy: ${GEMINI_API_KEY_STRATEGY:}
+    analyst: ${GEMINI_API_KEY_ANALYST:}
+    report: ${GEMINI_API_KEY_REPORT:}
 
 # Analysis Configuration
 analysis:

@@ -38,21 +38,21 @@ eureka:
 
 gemini:
   base-url: https://generativelanguage.googleapis.com/v1beta/models
-  default-model: gemini-2.0-flash-exp
+  default-model: gemini-1.5-flash
   timeout: 120
   models:
-    - name: flash-lite
-      model-id: gemini-2.0-flash-exp
-      requests-per-minute: 15
-      requests-per-day: 1000
     - name: flash
-      model-id: gemini-2.0-flash-exp
-      requests-per-minute: 10
-      requests-per-day: 250
+      model-id: gemini-1.5-flash
+      requests-per-minute: 15
+      requests-per-day: 1500
+    - name: flash-8b
+      model-id: gemini-1.5-flash-8b
+      requests-per-minute: 15
+      requests-per-day: 1500
     - name: pro
-      model-id: gemini-2.0-flash-exp
-      requests-per-minute: 5
-      requests-per-day: 100
+      model-id: gemini-1.5-pro
+      requests-per-minute: 2
+      requests-per-day: 50
   api-keys:
     portfolio: ${GEMINI_API_KEY_PORTFOLIO:}
     market: ${GEMINI_API_KEY_MARKET:}

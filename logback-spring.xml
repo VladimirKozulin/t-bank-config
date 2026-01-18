@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <springProperty scope="context" name="logstashHost" source="logback.appender.logstash.host" defaultValue="localhost"/>
+    <springProperty scope="context" name="logstashPort" source="logback.appender.logstash.port" defaultValue="5000"/>
+    <springProperty scope="context" name="logstashEnabled" source="logback.appender.logstash.enabled" defaultValue="true"/>
+
+    <!-- Console appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logstash appender -->
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>${logstashHost}:${logstashPort}</destination>
+        
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"service":"${springAppName}"}</customFields>
+            <includeMdcKeyName>traceId</includeMdcKeyName>
+            <includeMdcKeyName>spanId</includeMdcKeyName>
+            <includeMdcKeyName>userId</includeMdcKeyName>
+        </encoder>
+        
+        <!-- Reconnection settings -->
+        <reconnectionDelay>10 seconds</reconnectionDelay>
+        
+        <!-- Async settings for better performance -->
+        <keepAliveDuration>5 minutes</keepAliveDuration>
+        <writeBufferSize>16384</writeBufferSize>
+    </appender>
+
+    <!-- Async wrapper for Logstash to avoid blocking -->
+    <appender name="ASYNC_LOGSTASH" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="LOGSTASH"/>
+        <queueSize>512</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <if condition='property("logstashEnabled").equals("true")'>
+            <then>
+                <appender-ref ref="ASYNC_LOGSTASH"/>
+            </then>
+        </if>
+    </root>
+
+    <!-- Application logger -->
+    <logger name="ru.javabegin.micro.demo" level="DEBUG"/>
+    
+    <!-- Spring framework loggers -->
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.cloud" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+</configuration>

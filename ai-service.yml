@@ -38,13 +38,13 @@ eureka:
 
 openrouter:
   base-url: https://openrouter.ai/api/v1
-  model: meta-llama/llama-3.2-3b-instruct:free
+  model: deepseek/deepseek-r1-0528:free
   fallback-models:
-    - meta-llama/llama-3.2-3b-instruct:free
-    - meta-llama/llama-3.1-8b-instruct:free
-    - mistralai/mistral-7b-instruct:free
-    - google/gemini-2.0-flash-exp:free
-    - qwen/qwen-2-7b-instruct:free
+    - deepseek/deepseek-r1-0528:free           # Лучшая для рассуждений и анализа
+    - meta-llama/llama-3.3-70b-instruct:free   # Мощная для сложных задач
+    - meta-llama/llama-3.1-405b-instruct:free  # Самая мощная для сложного анализа
+    - google/gemini-2.0-flash-exp:free         # Быстрая с большим контекстом (1M)
+    - mistralai/mistral-7b-instruct:free       # Быстрая запасная
   timeout: 120
   keys:
     portfolio: ${OPENROUTER_KEY_PORTFOLIO:}

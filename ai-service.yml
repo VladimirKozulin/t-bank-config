@@ -54,14 +54,12 @@ analysis:
   target-monthly-income: 100000
   default-years-horizon: 15
 
-# RBC Parser Configuration
-rbc:
-  parser:
-    base-url: https://www.rbc.ru
-    timeout: 30
-    cache-ttl-hours: 6
-    max-news-per-ticker: 10
-    max-news-total: 50
+# FlareSolverr Configuration
+flaresolverr:
+  base-url: http://localhost:8191
+  max-timeout: 60000
+  cache-ttl-hours: 6
+  max-news-per-source: 10
 
 logging:
   level:

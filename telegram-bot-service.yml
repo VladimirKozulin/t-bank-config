@@ -28,6 +28,17 @@ eureka:
     instance-id: ${spring.application.name}:${random.value}
     prefer-ip-address: true
 
+# Feign Client Configuration - увеличенные таймауты для AI анализа
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000      # 10 секунд на подключение
+        readTimeout: 180000        # 3 минуты на чтение ответа (AI анализ долгий)
+      ai-service:
+        connectTimeout: 10000
+        readTimeout: 180000        # 3 минуты специально для AI Service
+
 telegram:
   bot:
     token: ${TELEGRAM_BOT_TOKEN:your-bot-token-here}

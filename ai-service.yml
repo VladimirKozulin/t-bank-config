@@ -68,13 +68,13 @@ gemini:
       requests-per-minute: 5
       requests-per-day: 50
   api-keys:
-    portfolio: ${GEMINI_API_KEY:}
-    market: ${GEMINI_API_KEY:}
-    news: ${GEMINI_API_KEY:}
-    stock: ${GEMINI_API_KEY:}
-    strategy: ${GEMINI_API_KEY:}
-    analyst: ${GEMINI_API_KEY:}
-    report: ${GEMINI_API_KEY:}
+    portfolio: ${GEMINI_API_KEY_PORTFOLIO:}
+    market: ${GEMINI_API_KEY_MARKET:}
+    news: ${GEMINI_API_KEY_NEWS:}
+    stock: ${GEMINI_API_KEY_STOCK:}
+    strategy: ${GEMINI_API_KEY_STRATEGY:}
+    analyst: ${GEMINI_API_KEY_ANALYST:}
+    report: ${GEMINI_API_KEY_REPORT:}
 
 # Analysis Configuration
 analysis:

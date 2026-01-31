@@ -91,6 +91,11 @@ logging:
   level:
     root: INFO
     ru.javabegin: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.cloud: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.apache.kafka: INFO
   file:
     name: logs/ai-service.log
   pattern:
